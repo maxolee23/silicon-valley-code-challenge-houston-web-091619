@@ -5,13 +5,13 @@ class VentureCapitalist
     @@all = []
 
     def initialize(name, total_worth)
-        @name = name 
+        @name = name
         @total_worth = total_worth
-        @@all << self 
+        @@all << self
     end
 
-    def self.all 
-        @@all 
+    def self.all
+        @@all
     end
 
     def self.tres_commas_club
@@ -25,26 +25,26 @@ class VentureCapitalist
         FundingRound.new(startup, self, type, investment)
     end
 
-    def fundingrounds 
+    def fundingrounds
         FundingRound.all.select do |fundinground|
-            fundinground.venture_capitalist == self 
+            fundinground.venture_capitalist == self
         end
     end
 
-    def portfolio 
-        fundingrounds.map do |fundinground| 
-            fundinground.startup 
+    def portfolio
+        fundingrounds.map do |fundinground|
+            fundinground.startup
         end
     end
 
-    def biggest_investment 
+    def biggest_investment
         fundingrounds.max_by {|round| round.investment}
-    end 
+    end
 
     def invested(domain)
         all = fundingrounds.select {|round| round.startup.domain == domain}
             all.inject(0) {|sum, round| sum + round.investment}
-    end 
+    end
 
 
 
